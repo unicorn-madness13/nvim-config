@@ -1,8 +1,17 @@
+local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 local wk = require('which-key')
 
+telescope.load_extension('workspaces')
+
 function grep_cmd()
 	builtin.grep_string({ search = vim.fn.input("Grep > ") })
+end
+
+function list_document_symbols()
+	builtin.lsp_document_symbols({
+		symbols = { "class", "method", "function", "struct", "enum" }
+	})
 end
 
 wk.register({
@@ -12,9 +21,10 @@ wk.register({
 		f = { "<cmd>Telescope find_files<cr>", "Find File" },
 		g = { grep_cmd, "Grep" },
 		r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
-		s = { "<cmd>Telescope lsp_document_symbols<cr>", "List Buffer Symbols" },
+		s = { list_document_symbols, "List Buffer Symbols" },
 		l = { "<cmd>Telescope lsp_references<cr>", "List Symbol References" },
 		e = { "<cmd>enew<cr>", "Edit File" },
+		w = { "<cmd>Telescope workspaces<cr>", "List Workspaces" },
 	}
 }, { prefix = "<leader>" })
 

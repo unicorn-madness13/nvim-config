@@ -1,3 +1,4 @@
+require("unicorn_madness.packer")
 require("unicorn_madness.remap")
 require("unicorn_madness.set")
 

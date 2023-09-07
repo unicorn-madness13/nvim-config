@@ -1,4 +1,5 @@
 local lsp = require('lsp-zero')
+local cmp = require('cmp')
 local config = require('lspconfig')
 local wk = require('which-key')
 
@@ -8,20 +9,8 @@ lsp.ensure_installed({
 	'tsserver',
 	'eslint',
 	'clangd',
-	'rust_analyzer'
-})
-
-local cmp = require('cmp')
-local cmp_select = {behavior = cmp.SelectBehavior.Select}
-local cmp_mappings = lsp.defaults.cmp_mappings({
-	['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
-	['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-	['<C-y>'] = cmp.mapping.confirm({ select = true }),
-	['<C-space>'] = cmp.mapping.complete(),
-})
-
-lsp.setup_nvim_cmp({
-	mapping = cmp_mappings
+	'rust_analyzer',
+	'gopls'
 })
 
 lsp.set_preferences({
@@ -32,23 +21,46 @@ lsp.set_preferences({
 local on_attach = function(client, bufnr)
 	local opts = {buffer = bufnr, remap = false}
 
+	wk.register({
+		v = {
+			name = "code actions",
+			d = { vim.diagnostic.open_float, "Show Diagnostics", opts },
+			f = { function() vim.lsp.buf.format { async = true } end, "Format Code", opts },
+			["ca"] = { vim.lsp.buf.code_action, "Code Action", opts },
+			["rn"] = { vim.lsp.buf.rename, "Rename", opts },
+			["rr"] = { vim.lsp.buf.references, "References", opts },
+			["ws"] = { vim.lsp.buf.workspace_symbol, "Workspace Symbols", opts },
+		}
+	}, { prefix = "<leader>" })
+
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-	vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-	vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-	vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-	vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-	vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-	vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
-	vim.keymap.set("n", "<leader>vf", function() vim.lsp.buf.format { async = true } end, opts)
-	vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-	vim.keymap.set("n", "<leader>vrr", function() vim.lsp.buf.references() end, opts)
-	vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
-	vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
+	vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+	vim.keymap.set("n", "[d", vim.diagnostic.goto_next, opts)
+	vim.keymap.set("n", "]d", vim.diagnostic.goto_prev, opts)
+	vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 end
 
 lsp.on_attach(on_attach)
 lsp.setup()
+
+local cmp_select = {behavior = cmp.SelectBehavior.Select}
+cmp.setup({
+	completion = {
+		autocomplete = false,
+		completeopt = "menu,menuone,noselect",
+	},
+	sources = {
+    {name = 'nvim_lsp'},
+	},
+	mapping = {
+		['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
+		['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
+		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		['<C-e>'] = cmp.mapping.complete(),
+	}
+})
 
 local lsp_flags = {
 	debounce_text_changes = 150,
@@ -61,6 +73,13 @@ config['clangd'].setup({
 config['rust_analyzer'].setup({
 	on_attach = on_attach,
 	flags = lsp_flags,
+})
+
+config['gopls'].setup({
+	on_attach = on_attach,
+	flags = lsp_flags,
+	cmd = { "gopls", "serve" },
+	filetypes = { "go", "gomod" },
 })
 
 vim.diagnostic.config({

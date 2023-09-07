@@ -7,7 +7,17 @@ function ColorMyPencils(color)
 	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
 end
 
-ColorMyPencils("tokyonight-storm")
+require('monokai').setup({
+	italics = false,
+	custom_hlgroups = {
+		LineNr = {
+			fg = 'none',
+			bg = 'none'
+		}
+	}
+})
+
+--ColorMyPencils('tokyonight')
 
 function CatMyPencils()
 	require('catppuccin').setup({
@@ -167,3 +177,5 @@ function CatMyPencils()
 
 	vim.cmd.colorscheme('catppuccin')
 end
+
+CatMyPencils()

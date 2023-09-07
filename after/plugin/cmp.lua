@@ -1,6 +1,6 @@
-local cmp = require('cmp')
+--local cmp = require('cmp')
 
-cmp.setup({
-	enabled = false,
-})
+--[[ cmp.setup({
+	enabled = true,
+}) ]]
 

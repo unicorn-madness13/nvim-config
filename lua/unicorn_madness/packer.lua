@@ -8,9 +8,10 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
 	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.1',
-		-- or                            , branch = '0.1.x',
-		requires = { {'nvim-lua/plenary.nvim'} }
+		'nvim-telescope/telescope.nvim', tag = '0.1.2',
+		requires = {
+			{'nvim-lua/plenary.nvim'}
+		}
 	}
 
 	-- dashboard
@@ -22,38 +23,36 @@ return require('packer').startup(function(use)
 		}
 	}
 
+	-- status line
+	use {
+		'nvim-lualine/lualine.nvim',
+		requires = {
+			{'nvim-tree/nvim-web-devicons'}
+		}
+	}
+
 	-- color schemes
 	use { 'rose-pine/neovim', as = 'rose-pine' }
 	use { 'catppuccin/nvim', as = 'catppuccin' }
-	use { 'bluz71/vim-moonfly-colors', as = 'moonfly' }
-	use { 'nanotech/jellybeans.vim', as = 'jellybeans' }
 	use { 'nyoom-engineering/oxocarbon.nvim' }
 	use { 'Shatur/neovim-ayu' }
 	use { 'folke/tokyonight.nvim' }
 	use { 'ellisonleao/gruvbox.nvim' }
 	use { 'marko-cerovac/material.nvim' }
 	use { 'sainnhe/edge' }
-	use { 'ray-x/starry.nvim' }
-	use { 
-		'mcchrish/zenbones.nvim',
-		requires = {
-			{'rktjmp/lush.nvim'}
-		},
-	}
 	use { 'huyvohcmc/atlas.vim' }
 	use { 'rockerBOO/boo-colorscheme-nvim' }
 	use { 'lourenci/github-colors' }
+	use { 'rebelot/kanagawa.nvim' }
+	use { 'NTBBloodbath/doom-one.nvim' }
+	use { 'tanvirtin/monokai.nvim' }
+	use { 'sainnhe/sonokai' }
+	use { 'theniceboy/nvim-deus' }
+	use { 'FrenzyExists/aquarium-vim' }
+	use { 'olivercederborg/poimandres.nvim' }
 
 	use ( 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'} )
 	use { 'nvim-treesitter/playground' }
-
-	use { 
-		'nvim-neorg/neorg',
-		requires = {
-			{'nvim-lua/plenary.nvim'},
-		},
-		run = ":Neorg sync-parsers"
-	}
 
 	-- file stuff
 	use { 'theprimeagen/harpoon' }
@@ -69,6 +68,7 @@ return require('packer').startup(function(use)
 			{'nvim-lua/plenary.nvim'},
 		},
 	}
+	use { 'natecraddock/workspaces.nvim' }
 
 	use { 'mbbill/undotree' }
 
@@ -107,5 +107,4 @@ return require('packer').startup(function(use)
 			vim.o.timeoutlen = 300
 		end
 	}
-	use { "folke/zen-mode.nvim" }
 end)
