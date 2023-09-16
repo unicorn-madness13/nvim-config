@@ -45,21 +45,23 @@ function CatMyPencils()
 			telescope = true
 		},
 		color_overrides = {
-			-- taken from https://github.com/ayamir/nvimdots/blob/main/lua/modules/configs/ui/catppuccin.lua
-			mocha = {
-				rosewater = "#F5E0DC",
+			macchiato = {
+				rosewater = "#ebb9b9",
 				flamingo = "#F2CDCD",
 				mauve = "#DDB6F2",
-				pink = "#F5C2E7",
+				pink = "#f6bbe7",
 				red = "#F28FAD",
 				maroon = "#E8A2AF",
-				peach = "#F8BD96",
-				yellow = "#FAE3B0",
+				peach = "#f5c9a5",
+				yellow = "#e6dfb8",
 				green = "#ABE9B3",
-				blue = "#96CDFB",
+				blue = "#b8deeb",
 				sky = "#89DCEB",
 				teal = "#B5E8E0",
-				lavender = "#C9CBFF",
+				lavender = "#cddbf9",
+
+				steel = '#63718b',
+				deepsteel = '#3d4059',
 
 				text = "#D9E0EE",
 				subtext1 = "#BAC2DE",
@@ -71,111 +73,47 @@ function CatMyPencils()
 				surface1 = "#575268",
 				surface0 = "#302D41",
 
-				base = "#1E1E2E",
-				mantle = "#1A1826",
-				crust = "#161320",
+				base = "#20202a",
+				mantle = "#1a1a24",
+				crust = "#313449",
 			}
 		},
 		highlight_overrides = {
-			mocha = function(cp)
+			macchiato = function(cp)
 				return {
 					TabLineSel = { bg = cp.pink },
 					CmpBorder = { fg = cp.surface2 },
 					Pmenu = { bg = cp.none },
 					TelescopeBorder = { link = "FloatBorder" },
 
-					-- For treesitter.
-					["@field"] = { fg = cp.rosewater },
-					["@property"] = { fg = cp.yellow },
+					['@keyword'] = { fg = cp.rosewater },
+					['@keyword.function'] = { fg = cp.rosewater },
+					['@keyword.return'] = { fg = cp.rosewater },
 
-					["@include"] = { fg = cp.teal },
-					-- ["@operator"] = { fg = cp.sky },
-					["@keyword.operator"] = { fg = cp.sky },
-					["@punctuation.special"] = { fg = cp.maroon },
+					['@include'] = { fg = cp.rosewater },
+					['@namespace'] = { fg = cp.yellow },
 
-					-- ["@float"] = { fg = cp.peach },
-					-- ["@number"] = { fg = cp.peach },
-					-- ["@boolean"] = { fg = cp.peach },
+					['@function.builtin'] = { fg = cp.blue },
+					['@function.call'] = { fg = cp.blue },
+					['@function.macro'] = { fg = cp.blue },
+					['@method.call'] = { fg = cp.blue },
 
-					["@constructor"] = { fg = cp.lavender },
-					-- ["@constant"] = { fg = cp.peach },
-					-- ["@conditional"] = { fg = cp.mauve },
-					-- ["@repeat"] = { fg = cp.mauve },
-					["@exception"] = { fg = cp.peach },
+					['@variable'] = { fg = cp.steel },
+					['@parameter'] = { fg = cp.steel },
 
-					["@constant.builtin"] = { fg = cp.lavender },
-					-- ["@function.builtin"] = { fg = cp.peach, style = { "italic" } },
-					-- ["@type.builtin"] = { fg = cp.yellow, style = { "italic" } },
-					["@type.qualifier"] = { link = "@keyword" },
-					["@variable.builtin"] = { fg = cp.red, style = { "italic" } },
+					['@punctuation.bracket'] = { fg = cp.steel },
+					['@punctuation.delimiter'] = { fg = cp.steel },
 
-					-- ["@function"] = { fg = cp.blue },
-					["@function.macro"] = { fg = cp.red, style = {} },
-					["@parameter"] = { fg = cp.rosewater },
-					["@keyword"] = { fg = cp.red, style = { "italic" } },
-					["@keyword.function"] = { fg = cp.maroon },
-					["@keyword.return"] = { fg = cp.pink, style = {} },
+					['@type'] = { fg = cp.blue },
+					['@type.qualifier'] = { fg = cp.yellow },
 
-					-- ["@text.note"] = { fg = cp.base, bg = cp.blue },
-					-- ["@text.warning"] = { fg = cp.base, bg = cp.yellow },
-					-- ["@text.danger"] = { fg = cp.base, bg = cp.red },
-					-- ["@constant.macro"] = { fg = cp.mauve },
-
-					-- ["@label"] = { fg = cp.blue },
-					["@method"] = { fg = cp.blue, style = { "italic" } },
-					["@namespace"] = { fg = cp.rosewater, style = {} },
-
-					["@punctuation.delimiter"] = { fg = cp.teal },
-					["@punctuation.bracket"] = { fg = cp.overlay2 },
-					-- ["@string"] = { fg = cp.green },
-					-- ["@string.regex"] = { fg = cp.peach },
-					["@type"] = { fg = cp.yellow },
-					["@variable"] = { fg = cp.text },
-					["@tag.attribute"] = { fg = cp.mauve, style = { "italic" } },
-					["@tag"] = { fg = cp.peach },
-					["@tag.delimiter"] = { fg = cp.maroon },
-					["@text"] = { fg = cp.text },
-
-					-- ["@text.uri"] = { fg = cp.rosewater, style = { "italic", "underline" } },
-					-- ["@text.literal"] = { fg = cp.teal, style = { "italic" } },
-					-- ["@text.reference"] = { fg = cp.lavender, style = { "bold" } },
-					-- ["@text.title"] = { fg = cp.blue, style = { "bold" } },
-					-- ["@text.emphasis"] = { fg = cp.maroon, style = { "italic" } },
-					-- ["@text.strong"] = { fg = cp.maroon, style = { "bold" } },
-					-- ["@string.escape"] = { fg = cp.pink },
-
-					-- ["@property.toml"] = { fg = cp.blue },
-					-- ["@field.yaml"] = { fg = cp.blue },
-
-					-- ["@label.json"] = { fg = cp.blue },
-
-					["@function.builtin.bash"] = { fg = cp.red, style = { "italic" } },
-					["@parameter.bash"] = { fg = cp.yellow, style = { "italic" } },
-
-					["@field.lua"] = { fg = cp.lavender },
-					["@constructor.lua"] = { fg = cp.flamingo },
-
-					["@constant.java"] = { fg = cp.teal },
-
-					["@property.typescript"] = { fg = cp.lavender, style = { "italic" } },
-					-- ["@constructor.typescript"] = { fg = cp.lavender },
-
-					-- ["@constructor.tsx"] = { fg = cp.lavender },
-					-- ["@tag.attribute.tsx"] = { fg = cp.mauve },
-
-					["@type.css"] = { fg = cp.lavender },
-					["@property.css"] = { fg = cp.yellow, style = { "italic" } },
-
-					["@type.builtin.c"] = { fg = cp.yellow, style = {} },
-
-					["@property.cpp"] = { fg = cp.text },
-					["@type.builtin.cpp"] = { fg = cp.yellow, style = {} },
+					['@comment'] = { fg = cp.deepsteel, style = { 'italic' } },
 				}
 			end,
 		},
 	})
 
-	vim.cmd.colorscheme('catppuccin')
+	vim.cmd.colorscheme('catppuccin-macchiato')
 end
 
 CatMyPencils()
