@@ -14,13 +14,8 @@ return require('packer').startup(function(use)
 		}
 	}
 
-	-- dashboard
-	use { 
-		'startup-nvim/startup.nvim',
-		requires = {
-			{'nvim-telescope/telescope.nvim'},
-			{'nvim-lua/plenary.nvim'}
-		}
+	use {
+		'goolord/alpha-nvim',
 	}
 
 	-- status line
@@ -55,7 +50,6 @@ return require('packer').startup(function(use)
 	use { 'nvim-treesitter/playground' }
 
 	-- file stuff
-	use { 'theprimeagen/harpoon' }
 	use {
 		'nvim-tree/nvim-tree.lua',
 		requires = {
@@ -69,6 +63,7 @@ return require('packer').startup(function(use)
 		},
 	}
 	use { 'natecraddock/workspaces.nvim' }
+	use { 'jakewvincent/mkdnflow.nvim' }
 
 	use { 'mbbill/undotree' }
 
