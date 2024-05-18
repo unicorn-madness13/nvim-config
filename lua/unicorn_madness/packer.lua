@@ -8,7 +8,7 @@ return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 
 	use {
-		'nvim-telescope/telescope.nvim', tag = '0.1.2',
+		'nvim-telescope/telescope.nvim',
 		requires = {
 			{'nvim-lua/plenary.nvim'}
 		}
@@ -27,29 +27,39 @@ return require('packer').startup(function(use)
 	}
 
 	-- color schemes
-	use { 'rose-pine/neovim', as = 'rose-pine' }
-	use { 'catppuccin/nvim', as = 'catppuccin' }
-	use { 'nyoom-engineering/oxocarbon.nvim' }
-	use { 'Shatur/neovim-ayu' }
-	use { 'folke/tokyonight.nvim' }
-	use { 'ellisonleao/gruvbox.nvim' }
-	use { 'marko-cerovac/material.nvim' }
-	use { 'sainnhe/edge' }
-	use { 'huyvohcmc/atlas.vim' }
-	use { 'rockerBOO/boo-colorscheme-nvim' }
-	use { 'lourenci/github-colors' }
-	use { 'rebelot/kanagawa.nvim' }
-	use { 'NTBBloodbath/doom-one.nvim' }
-	use { 'tanvirtin/monokai.nvim' }
-	use { 'sainnhe/sonokai' }
-	use { 'theniceboy/nvim-deus' }
+	use { 'EdenEast/nightfox.nvim' }
 	use { 'FrenzyExists/aquarium-vim' }
+	use { 'Mofiqul/dracula.nvim' }
+	use { 'NTBBloodbath/doom-one.nvim' }
+	use { 'Shatur/neovim-ayu' }
+	use { 'catppuccin/nvim', as = 'catppuccin' }
+	use { 'dasupradyumna/midnight.nvim' }
+	use { 'ellisonleao/gruvbox.nvim' }
+	use { 'folke/tokyonight.nvim' }
+	use { 'huyvohcmc/atlas.vim' }
+	use { 'kvrohit/mellow.nvim' }
+	use { 'kvrohit/substrata.nvim' }
+	use { 'lourenci/github-colors' }
+	use { 'marko-cerovac/material.nvim' }
+	use { 'nvimdev/zephyr-nvim' }
+	use { 'nyoom-engineering/oxocarbon.nvim' }
 	use { 'olivercederborg/poimandres.nvim' }
+	use { 'oxfist/night-owl.nvim' }
+	use { 'ramojus/mellifluous.nvim' }
+	use { 'rebelot/kanagawa.nvim' }
+	use { 'rockerBOO/boo-colorscheme-nvim' }
+	use { 'rose-pine/neovim', as = 'rose-pine' }
+	use { 'sainnhe/edge' }
+	use { 'sainnhe/sonokai' }
+	use { 'savq/melange-nvim' }
+	use { 'tanvirtin/monokai.nvim' }
+	use { 'theniceboy/nvim-deus' }
 
-	use ( 'nvim-treesitter/nvim-treesitter', {run = ':TSUpdate'} )
+	use ( 'nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' } )
 	use { 'nvim-treesitter/playground' }
 
-	-- file stuff
+	-- utilities
+	use { 'ggandor/leap.nvim' }
 	use {
 		'nvim-tree/nvim-tree.lua',
 		requires = {
@@ -64,6 +74,11 @@ return require('packer').startup(function(use)
 	}
 	use { 'natecraddock/workspaces.nvim' }
 	use { 'jakewvincent/mkdnflow.nvim' }
+	use (
+		'iamcco/markdown-preview.nvim', { 
+			run = function() vim.fn['mkdp#util#install']() end, 
+		}
+	)
 
 	use { 'mbbill/undotree' }
 

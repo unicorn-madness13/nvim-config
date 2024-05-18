@@ -1,4 +1,4 @@
-vim.opt.guifont = 'FiraCode Nerd Font:h10'
+vim.opt.guifont = 'Hack Nerd Font Mono:h10'
 vim.opt.encoding = 'utf-8'
 vim.opt.fileformat = 'unix'
 

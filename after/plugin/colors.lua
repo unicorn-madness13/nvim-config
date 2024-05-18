@@ -1,10 +1,11 @@
 function ColorMyPencils(color)
-	color = color or "rose-pine"
+	color = color or "mellow"
 	vim.cmd.colorscheme(color)
 
 	vim.api.nvim_set_hl(0, "Normal", { bg = "none" })
-	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none" })
+	vim.api.nvim_set_hl(0, "NormalFloat", { bg = "none"  })
 	vim.api.nvim_set_hl(0, "NormalNC", { bg = "none" })
+	vim.api.nvim_set_hl(0, "LineNr", { bg = "none" })
 end
 
 function NoItalics()
@@ -13,6 +14,8 @@ function NoItalics()
 	vim.api.nvim_set_hl(0, 'Keyword', { italic = false })
 	vim.api.nvim_set_hl(0, 'Constant', { italic = false })
 end
+
+require('dracula').setup()
 
 require('gruvbox').setup({
 	contrast = "hard",
@@ -30,6 +33,14 @@ require('monokai').setup({
 
 require('rose-pine').setup({
 	disable_italics = true,
+})
+
+require('tokyonight').setup({
+	transparent = true,
+	styles = {
+		keywords = { italic = false },
+		sidebars = 'transparent'
+	},
 })
 
 require('catppuccin').setup({
@@ -63,19 +74,17 @@ require('catppuccin').setup({
 			pink = "#f6bbe7",
 			peach = "#f5c9a5", -- changes the command lualine color
 			yellow = "#e6dfb8",
-			red = "#e06b6b",
+			red = "#d77070",
 			maroon = "#e8a2af",
 			green = "#b1dba4",
 			blue = "#b8deeb",
-			sky = "#89dceb",
+			sky = "#b9eaf3",
 			teal = "#b5e8e0",
 			lavender = "#cddbf9",
 
-			gold = "#ffd89c",
-			cyan = "#a3dae1",
 			steel = "#63718b",
 			deepsteel = "#3d4059",
-			sunglow = "#ffd166",
+			deepsteel1 = "#535779",
 
 			text = "#a7b7d6",
 			subtext0 = "#63718b",
@@ -120,10 +129,12 @@ require('catppuccin').setup({
 		macchiato = function(cp)
 			return {
 				MatchParen = { fg = cp.blue },
+				Macro = { fg = cp.blue },
 
 				["@keyword"] = { fg = cp.rosewater },
 				["@keyword.function"] = { fg = cp.rosewater },
 				["@keyword.return"] = { fg = cp.rosewater },
+				["@keyword.operator"] = { fg = cp.rosewater },
 
 				["@include"] = { fg = cp.rosewater },
 				["@namespace"] = { fg = cp.yellow },
@@ -138,13 +149,16 @@ require('catppuccin').setup({
 				["@function.macro"] = { fg = cp.blue },
 				["@method.call"] = { fg = cp.blue },
 
+				["@repeat"] = { fg = cp.blue },
+				["@conditional"] = { fg = cp.blue },
+
 				["@punctuation.bracket"] = { fg = cp.steel },
 				["@punctuation.delimiter"] = { fg = cp.steel },
 
 				["@type"] = { fg = cp.blue },
 				["@type.qualifier"] = { fg = cp.yellow },
 
-				["@comment"] = { fg = cp.deepsteel, style = { "italic" } },
+				["@comment"] = { fg = cp.deepsteel1, style = { "italic" } },
 			}
 		end,
 		mocha = function(cp)
@@ -209,5 +223,5 @@ require('catppuccin').setup({
 	},
 })
 
-vim.cmd.colorscheme('catppuccin-macchiato')
---ColorMyPencils()
+--ColorMyPencils('midnight')
+vim.cmd.colorscheme('tokyonight')

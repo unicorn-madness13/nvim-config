@@ -2,6 +2,22 @@ local telescope = require('telescope')
 local builtin = require('telescope.builtin')
 local wk = require('which-key')
 
+telescope.setup({
+	defaults = {
+		file_ignore_patterns = { 
+			".cache\\",
+			".cargo\\",
+			".git\\",
+			".vs\\",
+			".vscode\\",
+			"target\\",
+			"build\\",
+			"dist\\",
+			"venv.*\\",
+		},
+	},
+})
+
 telescope.load_extension('workspaces')
 
 function grep_cmd()
