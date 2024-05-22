@@ -1,16 +1,15 @@
 local lsp = require('lsp-zero')
 local cmp = require('cmp')
 local config = require('lspconfig')
+local mason = require('mason')
+local mason_lsp_config = require('mason-lspconfig')
 local wk = require('which-key')
 
 lsp.preset('recommended')
 
-lsp.ensure_installed({
-	'tsserver',
-	'eslint',
-	'clangd',
-	'rust_analyzer',
-	'gopls'
+mason.setup({})
+mason_lsp_config.setup({
+	ensure_installed = {'tsserver', 'eslint', 'clangd', 'rust_analyzer', 'gopls'},
 })
 
 lsp.set_preferences({
@@ -51,13 +50,20 @@ cmp.setup({
 		autocomplete = false,
 		completeopt = "menu,menuone,noselect",
 	},
+	snippet = {
+		expand = function(args)
+			require('luasnip').lsp_expand(args.body)
+		end
+	},
 	sources = {
-    {name = 'nvim_lsp'},
+    	{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
 	},
 	mapping = {
 		['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
 		['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
 		['<C-y>'] = cmp.mapping.confirm({ select = true }),
+		['<CR>']  = cmp.mapping.confirm({ select = true }),
 		['<C-e>'] = cmp.mapping.complete(),
 	}
 })
